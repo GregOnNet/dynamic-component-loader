@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
   DynamicComponentLoaderModule,
@@ -34,7 +34,8 @@ const manifests: DynamicComponentManifest[] = [
     MatDialogModule,
     NoopAnimationsModule,
 
-    DynamicComponentLoaderModule.forRoot(manifests)
+    DynamicComponentLoaderModule.forRoot(manifests),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],
