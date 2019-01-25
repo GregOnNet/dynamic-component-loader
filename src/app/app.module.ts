@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { StartUpService } from './config/start-up-config.service';
 import {
   DynamicComponentLoaderModule,
   DynamicComponentManifest
@@ -25,6 +26,14 @@ const manifests: DynamicComponentManifest[] = [
   }
 ];
 
+export function beforeStartFactory(startUp: StartUpService) {
+  return () =>
+    startUp
+      .beforeStart()
+      .toPromise()
+      .then(message => console.info(message));
+}
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -37,7 +46,14 @@ const manifests: DynamicComponentManifest[] = [
     DynamicComponentLoaderModule.forRoot(manifests),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      useFactory: beforeStartFactory,
+      deps: [StartUpService]
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent]
 })
