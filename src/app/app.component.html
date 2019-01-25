@@ -26,8 +26,20 @@
   [queryParams]="{ hallo: 'Steffen', city: 'Leipzig' }"
   >?hallo=Steffen&city=Leipzig</a
 >
+|
+<a
+  routerLink="/load-me-later"
+  [queryParams]="{
+    hallo: 'Steffen',
+    city: 'Leipzig',
+    hobbies: ['1', '2', '3', true]
+  }"
+  >Serialisierte Parameter</a
+>
 
 <hr />
+
+<a routerLink="/load-me-later/sample/steffen/other">Sample</a>
 
 <div #testOutlet></div>
 

@@ -27,6 +27,10 @@ const routes: Routes = [
         }
       }
     ]
+  },
+  {
+    path: 'sample/:name/other',
+    component: SecondMemberComponent
   }
 ];
 
