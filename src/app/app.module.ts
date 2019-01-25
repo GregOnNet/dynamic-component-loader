@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,6 +12,7 @@ import {
 } from './dynamic-component-loader/dynamic-component-loader.module';
 import { DialogComponent } from './dynamic-modules/dialog/dialog.component';
 import { DialogModule } from './dynamic-modules/dialog/dialog.module';
+import { InterceptorsModule } from './interceptors/interceptors.module';
 
 // This array defines which "componentId" maps to which lazy-loaded module.
 const manifests: DynamicComponentManifest[] = [
@@ -39,11 +41,13 @@ export function beforeStartFactory(startUp: StartUpService) {
   imports: [
     BrowserModule,
     DialogModule,
+    HttpClientModule,
 
     MatDialogModule,
     NoopAnimationsModule,
 
     DynamicComponentLoaderModule.forRoot(manifests),
+    InterceptorsModule,
     AppRoutingModule
   ],
   providers: [

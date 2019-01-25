@@ -1,6 +1,6 @@
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
-
 import { DynamicComponentLoader } from './dynamic-component-loader/dynamic-component-loader.service';
 import { DialogComponent } from './dynamic-modules/dialog/dialog.component';
 import { MessageComponent } from './dynamic-modules/message/message.component';
@@ -9,14 +9,20 @@ import { MessageComponent } from './dynamic-modules/message/message.component';
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @ViewChild('testOutlet', { read: ViewContainerRef })
   testOutlet: ViewContainerRef | undefined;
 
   constructor(
     private dynamicComponentLoader: DynamicComponentLoader,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    // Don't do this at home
+    private http: HttpClient
   ) {}
+
+  ngOnInit() {
+    this.http.get('https://pokeapi.co/api/v2/pokemon/ditto/').subscribe();
+  }
 
   loadComponent() {
     this.dynamicComponentLoader
