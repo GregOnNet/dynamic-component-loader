@@ -7,6 +7,28 @@
 <button type="button" (click)="loadComponent()">Load!</button>
 <a routerLink="/load-me-later">Go To Load Me Later</a>
 
+<hr />
+
+<a
+  routerLink="/load-me-later"
+  [queryParams]="{ hallo: 'Gregor', city: 'Hattingen' }"
+  >?hallo=Steffen&city=Hattingen</a
+>
+|
+<a
+  routerLink="/load-me-later"
+  [queryParams]="{ hallo: 'Steffen', city: 'Hattingen' }"
+  >?hallo=Steffen&city=Hattingen</a
+>
+|
+<a
+  routerLink="/load-me-later"
+  [queryParams]="{ hallo: 'Steffen', city: 'Leipzig' }"
+  >?hallo=Steffen&city=Leipzig</a
+>
+
+<hr />
+
 <div #testOutlet></div>
 
 <!-- vormals ui-view -->
